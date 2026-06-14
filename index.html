@@ -69,6 +69,42 @@
         .animate-rise-content {
             animation: riseUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
         }
+
+        /* Premium Shine Keyframe Animation for featured matches */
+        @keyframes shineSweep {
+            0% {
+                left: -120%;
+            }
+            30% {
+                left: 120%;
+            }
+            100% {
+                left: 120%;
+            }
+        }
+        
+        .shining-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shining-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.45) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: shineSweep 4.5s infinite ease-in-out;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-start items-center p-4 sm:p-6 md:p-8 bg-gray-100 text-gray-900">
@@ -98,20 +134,24 @@
             <!-- STACKED LIST FORMAT VIEW CONTAINER -->
             <div id="homeListContainer" class="space-y-4">
 
-                <!-- Card 1: Club World Cup (Upcoming Match) -->
-                <div onclick="showMatch('upcoming')" class="group relative bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-100 hover:border-blue-300 hover:shadow-lg transition-all duration-300 p-5 cursor-pointer flex flex-col justify-between h-36 hover:-translate-y-2">
+                <!-- Card 1: Club World Cup (Concluded Match) with Premium Shine Sweep Effect -->
+                <div onclick="showMatch('upcoming')" class="group shining-card relative bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-100 hover:border-blue-300 hover:shadow-lg transition-all duration-300 p-5 cursor-pointer flex flex-col justify-between h-36 hover:-translate-y-2">
+                    <!-- Scoreboard Row -->
                     <div class="flex items-center justify-center gap-4 sm:gap-6 my-auto">
+                        <!-- Home Team -->
                         <div class="flex items-center gap-2 sm:gap-3 justify-end flex-1 text-right min-w-0">
                             <span class="font-extrabold text-xs sm:text-base text-gray-900 truncate">Clonturk FC II</span>
                             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center overflow-hidden bg-pink-100 shrink-0 border border-pink-200">
                                 <span class="text-[10px] font-black text-pink-600">CFC</span>
                             </div>
                         </div>
+                        <!-- Score box -->
                         <div class="flex flex-col items-center">
-                            <div class="border border-gray-200/80 px-4 py-1.5 rounded-xl bg-gray-50 font-black font-mono text-xs sm:text-sm text-gray-400 shrink-0 uppercase tracking-wide">
-                                TBD
+                            <div class="border border-gray-200/80 px-4 py-1.5 rounded-xl bg-gray-50 font-black font-mono text-sm sm:text-base text-gray-950 shrink-0 shadow-3xs">
+                                3 - 10
                             </div>
                         </div>
+                        <!-- Away Team -->
                         <div class="flex items-center gap-2 sm:gap-3 justify-start flex-1 text-left min-w-0">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center overflow-hidden bg-blue-100 shrink-0 border border-blue-200">
                                 <span class="text-[10px] font-black text-blue-900">MT</span>
@@ -119,15 +159,16 @@
                             <span class="font-extrabold text-xs sm:text-base text-gray-900 truncate">Mount Temple FC II</span>
                         </div>
                     </div>
+                    <!-- Bottom Info Area -->
                     <div class="relative h-9 mt-1 border-t border-gray-100 flex items-center">
                         <div class="w-full flex items-center justify-between text-[11px]">
                             <div class="flex flex-wrap items-center gap-x-2">
                                 <span class="font-bold text-blue-600">IGG Club World Cup</span>
                                 <span class="text-gray-300">•</span>
-                                <span class="text-gray-400 font-bold">Date and time: TBD</span>
+                                <span class="text-gray-400 font-bold">Sun 14 June, 13:30</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <span class="inline-block px-2.5 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-full uppercase tracking-wider">Upcoming</span>
+                                <span class="inline-block px-2.5 py-0.5 bg-gray-100 text-gray-800 text-[10px] font-bold rounded-full uppercase tracking-wider">Full Time</span>
                             </div>
                         </div>
                     </div>
@@ -205,6 +246,7 @@
 
                 <!-- Card 4: Friendly Match (2-3) -->
                 <div onclick="showMatch('completed')" class="group relative bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-100 hover:border-blue-300 hover:shadow-lg transition-all duration-300 p-5 cursor-pointer flex flex-col justify-between h-36 hover:-translate-y-2">
+                    <!-- Scoreboard Row -->
                     <div class="flex items-center justify-center gap-4 sm:gap-6 my-auto">
                         <!-- Home Team -->
                         <div class="flex items-center gap-2 sm:gap-3 justify-end flex-1 text-right min-w-0">
@@ -226,6 +268,7 @@
                             <span class="font-extrabold text-xs sm:text-base text-gray-900 truncate">Mount Temple FC II</span>
                         </div>
                     </div>
+                    <!-- Bottom Info Area -->
                     <div class="relative h-9 mt-1 border-t border-gray-100 flex items-center">
                         <div class="w-full flex items-center justify-between text-[11px]">
                             <div class="flex flex-wrap items-center gap-x-2">
@@ -242,6 +285,7 @@
 
                 <!-- Card 5: Pre-Seasonal Match (6-6) -->
                 <div onclick="showMatch('preseason')" class="group relative bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-100 hover:border-blue-300 hover:shadow-lg transition-all duration-300 p-5 cursor-pointer flex flex-col justify-between h-40 hover:-translate-y-2">
+                    <!-- Scoreboard Row -->
                     <div class="flex items-center justify-center gap-4 sm:gap-6 my-auto">
                         <!-- Home Team -->
                         <div class="flex items-center gap-2 sm:gap-3 justify-end flex-1 text-right min-w-0">
@@ -264,6 +308,7 @@
                             <span class="font-extrabold text-xs sm:text-base text-gray-900 truncate">Mount Temple FC II</span>
                         </div>
                     </div>
+                    <!-- Bottom Info Area -->
                     <div class="relative h-9 mt-1 border-t border-gray-100 flex items-center">
                         <div class="w-full flex items-center justify-between text-[11px]">
                             <div class="flex flex-wrap items-center gap-x-2">
@@ -295,7 +340,7 @@
         <!-- TOP NAVIGATION BAR -->
         <div class="px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between border-b border-gray-100 animate-rise-header relative">
             <!-- Back Button to Home -->
-            <button id="backToHomeBtn" onclick="showMatch('home')" class="absolute left-4 sm:left-6 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-700 font-semibold text-xs transition duration-200">
+            <button id="backToFriendlyBtn" onclick="showMatch('home')" class="absolute left-4 sm:left-6 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-700 font-semibold text-xs transition duration-200">
                 <span>←</span>
                 <span>IGG Now</span>
             </button>
@@ -343,7 +388,7 @@
             <!-- Teams and Central Time -->
             <div class="w-full flex items-center justify-between gap-1 sm:gap-2 md:gap-4">
                 
-                <!-- Home Team -->
+                <!-- Home Team (Clonturk FC II) -->
                 <div class="flex-1 flex flex-col md:flex-row items-center justify-end text-right gap-2 sm:gap-3 md:gap-4">
                     <h2 id="homeTeamName" class="font-extrabold text-gray-900 text-xs sm:text-lg md:text-2xl lg:text-3xl tracking-tight order-2 md:order-1 text-center md:text-right leading-tight">
                         Clonturk FC II
@@ -371,7 +416,7 @@
                     </div>
                 </div>
 
-                <!-- Away Team -->
+                <!-- Away Team (Mount Temple FC II) -->
                 <div class="flex-1 flex flex-col md:flex-row items-center justify-start text-left gap-2 sm:gap-3 md:gap-4">
                     <!-- Away Logo placeholder/initials setup -->
                     <div class="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 shrink-0 flex items-center justify-center">
@@ -675,7 +720,7 @@
                 </div>
             </div>
 
-            <!-- SUMMARY TAB (Replacing Knockout Tab) -->
+            <!-- SUMMARY TAB -->
             <div id="content-summary" class="tab-content hidden space-y-4 sm:space-y-6 animate-rise-content">
                 <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-4 text-center py-10 sm:py-12">
                     <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto text-blue-600 mb-2">
@@ -790,7 +835,7 @@
                 <img id="modalBallImage" src="SondicoMeteorSize5.avif" alt="Match Ball" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <!-- Backup customized football vector graphic if image doesn't load -->
                 <div class="hidden flex-col items-center justify-center text-gray-300">
-                    <img src="footballoutline.svg" alt="Football" class="w-16 h-16 object-contain opacity-50" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <img src="footballoutline.svg" alt="Football" class="w-16 h-16 object-contain opacity-50 filter" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="hidden flex-col items-center justify-center text-gray-400 animate-pulse">
                         <svg class="w-16 h-16 text-gray-400 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="12" cy="12" r="10" />
@@ -1009,7 +1054,7 @@
             const matchStatusLabel = document.getElementById('matchStatusLabel');
             const matchScoreDisplay = document.getElementById('matchScoreDisplay');
             const scorersGrid = document.getElementById('scorersGrid');
-            const backBtn = document.getElementById('backToFriendlyBtn');
+            const backBtn = document.getElementById('backToHomeBtn') || document.getElementById('backToFriendlyBtn');
 
             // Badge/initials element swaps
             const homeTeamName = document.getElementById('homeTeamName');
@@ -1111,359 +1156,167 @@
             if (navLeftArrowBtn) navLeftArrowBtn.classList.add('hidden');
             if (navRightArrowBtn) navRightArrowBtn.classList.add('hidden');
 
-            if (matchType === 'jd-jp-1') {
-                // Joshua & Dima vs Patrick & Jack - Match 1 (5 - 2)
-                if (leagueTitle) leagueTitle.innerText = "IGG Friendlies (Match 1)";
-                if (metaDate) metaDate.innerText = "Sun 7 June, 15:00";
-                if (metaLocation) metaLocation.innerText = "DCU Soccer Centre";
+            // ----------------------------------------------------
+            // 1) Club World Cup Concluded Match Routing
+            // ----------------------------------------------------
+            if (matchType === 'upcoming') {
+                if (leagueTitle) leagueTitle.innerText = "IGG Club World Cup";
+                if (metaDate) metaDate.innerText = "Sun 14 June, 13:30";
+                if (metaLocation) metaLocation.innerText = "Albert College Park Soccer Pitches";
                 if (matchStatusLabel) matchStatusLabel.innerText = "Full Time";
-                if (matchScoreDisplay) matchScoreDisplay.innerText = "5 - 2";
+                if (matchScoreDisplay) matchScoreDisplay.innerText = "3 - 10";
+                if (scorersGrid) scorersGrid.classList.remove('hidden');
 
-                // Top Right Navigation Right arrow visible
-                if (navRightArrowBtn) navRightArrowBtn.classList.remove('hidden');
-
-                // Swapping badge team setups
-                if (homeTeamName) homeTeamName.innerText = "Joshua & Dima";
-                if (awayTeamName) awayTeamName.innerText = "Patrick & Jack";
-                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-yellow-400 border border-yellow-500";
-                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-100 border border-blue-250";
-                if (homeBadgeImg) homeBadgeImg.style.display = 'none';
-                if (awayBadgeImg) awayBadgeImg.style.display = 'none';
-                if (homeBadgeFallback) {
-                    homeBadgeFallback.className = "text-yellow-950 font-black text-xs sm:text-sm md:text-base";
-                    homeBadgeFallback.innerText = "JD";
-                    homeBadgeFallback.classList.remove('hidden');
+                if (homeTeamName) homeTeamName.innerText = "Clonturk FC II";
+                if (awayTeamName) awayTeamName.innerText = "Mount Temple FC II";
+                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-pink-50 border border-pink-100";
+                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-50 border border-blue-100";
+                if (homeBadgeImg) {
+                    homeBadgeImg.setAttribute('src', 'Clonturk.png');
+                    homeBadgeImg.style.display = 'block';
                 }
-                if (awayBadgeFallback) {
-                    awayBadgeFallback.className = "text-blue-900 font-black text-xs sm:text-sm md:text-base";
-                    awayBadgeFallback.innerText = "JP";
-                    awayBadgeFallback.classList.remove('hidden');
+                if (awayBadgeImg) {
+                    awayBadgeImg.setAttribute('src', 'MountTemple.png');
+                    awayBadgeImg.style.display = 'block';
                 }
+                if (homeBadgeFallback) homeBadgeFallback.classList.add('hidden');
+                if (awayBadgeFallback) awayBadgeFallback.classList.add('hidden');
 
                 // Scorers
                 if (clonturkScorersList) {
                     clonturkScorersList.innerHTML = `
-                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">1'</span></p>
-                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">2'</span></p>
-                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">2'</span></p>
-                        <p class="font-semibold text-gray-800">Dima <span class="text-gray-400 font-normal">3'</span></p>
-                        <p class="font-semibold text-gray-800">Dima <span class="text-gray-400 font-normal">4'</span></p>
+                        <p class="font-semibold text-gray-800">Liam <span class="text-gray-400 font-normal">8'</span></p>
+                        <p class="font-semibold text-gray-800">Oisin <span class="text-gray-400 font-normal">9'</span></p>
+                        <p class="font-semibold text-gray-800">Liam <span class="text-gray-400 font-normal">26'</span></p>
                     `;
                 }
                 if (mountTempleScorersList) {
                     mountTempleScorersList.innerHTML = `
-                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'3</span> Jack</p>
-                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'4</span> Patrick</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'8</span> Joshua</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'11</span> Patrick</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'12</span> Jack</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'19</span> Jack</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'22</span> Joshua</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'24</span> Joshua</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'26</span> Jack</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'28</span> Jack</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'29</span> Joshua</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'29</span> Jack</p>
                     `;
                 }
 
-                // Match Info Facts
-                if (factLocationText) factLocationText.innerText = "DCU Soccer Centre, Whitehall, Dublin";
-                if (factBallText) factBallText.innerText = "Size 5 White Sondico Meteor Football";
-                if (locationHoverRow) locationHoverRow.setAttribute("onclick", "window.open('https://maps.app.goo.gl/cqTvdnq8Kz5xuntD7', '_blank')");
-                if (surfaceText) surfaceText.innerText = "Astro";
-                if (weatherDisplay) weatherDisplay.innerText = "Cloudy/Windy, 16°C";
+                if (factLocationText) factLocationText.innerText = "Albert College Park Soccer Pitches, Whitehall, Dublin";
+                if (factBallText) factBallText.innerText = "Size 5 White Sondico Crossfire Football";
+                if (locationHoverRow) locationHoverRow.setAttribute("onclick", "window.open('https://maps.app.goo.gl/CuxEL2tzkKHB7mnL8', '_blank')");
+                if (surfaceText) surfaceText.innerText = "Grass";
+                if (weatherDisplay) weatherDisplay.innerText = "Sunny, 18°C";
 
-                // Ball specpopup Meteor config
-                if (modalBallTitle) modalBallTitle.innerText = "Sondico Meteor";
-                if (modalBallModel) modalBallModel.innerText = "Meteor";
-                if (ballConditionDisplay) ballConditionDisplay.innerText = "Brand New";
-                if (modalBallImage) modalBallImage.setAttribute("src", "SondicoMeteorSize5.avif");
-                if (colorOptionsDropdown) colorOptionsDropdown.innerHTML = colorways.meteor;
+                if (modalBallTitle) modalBallTitle.innerText = "Sondico Crossfire";
+                if (modalBallModel) modalBallModel.innerText = "Crossfire";
+                if (ballConditionDisplay) ballConditionDisplay.innerText = "Alright (Slight Wear)";
+                if (modalBallImage) modalBallImage.setAttribute("src", "SondicoCrxssfireSize5.webp");
+                if (colorOptionsDropdown) colorOptionsDropdown.innerHTML = colorways.crossfire;
 
-                // Probability even settings
-                if (clonturkProbTitle) clonturkProbTitle.innerText = "Joshua & Dima Win";
-                if (clonturkProbTitle) clonturkProbTitle.className = "font-bold text-yellow-500";
-                if (mountTempleProbTitle) mountTempleProbTitle.innerText = "Patrick & Jack Win";
-                if (mountTempleProbTitle) mountTempleProbTitle.className = "font-bold text-blue-900";
+                if (selectedCircle) selectedCircle.className = "w-4 h-4 rounded-full bg-white border border-gray-300 shadow-sm transition-all duration-300";
+                if (selectedName) selectedName.innerText = "White";
 
+                if (clonturkProbTitle) clonturkProbTitle.innerText = "Clonturk Win";
+                if (clonturkProbTitle) clonturkProbTitle.className = "font-bold text-[#FF69B4]";
+                if (mountTempleProbTitle) mountTempleProbTitle.innerText = "Mount Temple Win";
+                if (mountTempleProbTitle) mountTempleProbTitle.className = "font-bold text-[#001C48]";
+
+                // pre-match probabilities
                 if (clonturkProbBar) {
-                    clonturkProbBar.className = "bg-yellow-400 h-full";
-                    clonturkProbBar.style.width = '45%';
+                    clonturkProbBar.className = "bg-[#FF69B4] h-full";
+                    clonturkProbBar.style.width = '30%';
                 }
                 if (drawProbBar) drawProbBar.style.width = '10%';
                 if (mountTempleProbBar) {
-                    mountTempleProbBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTempleProbBar.style.width = '45%';
+                    mountTempleProbBar.className = "bg-[#001C48] h-full ml-auto";
+                    mountTempleProbBar.style.width = '60%';
                 }
-                if (clonturkProbText) clonturkProbText.innerText = "Joshua & Dima: 45%";
+                if (clonturkProbText) clonturkProbText.innerText = "Clonturk: 30%";
                 if (drawProbText) drawProbText.innerText = "Draw: 10%";
-                if (mountTempleProbText) mountTempleProbText.innerText = "Patrick & Jack: 45%";
+                if (mountTempleProbText) mountTempleProbText.innerText = "Mount Temple: 60%";
 
-                // Stats tab details config (Patrick and Jack had lots of possession but JD won)
                 if (statsMain) statsMain.classList.remove('hidden');
                 if (statsUnavailable) statsUnavailable.classList.add('hidden');
 
-                if (clonturkPossessionVal) clonturkPossessionVal.innerText = "40%";
-                if (mountTemplePossessionVal) mountTemplePossessionVal.innerText = "60%";
+                // Possession, Shots and Shots on Target
+                if (clonturkPossessionVal) clonturkPossessionVal.innerText = "35%";
+                if (mountTemplePossessionVal) mountTemplePossessionVal.innerText = "65%";
                 if (clonturkPossessionBar) {
-                    clonturkPossessionBar.className = "bg-yellow-400 h-full";
-                    clonturkPossessionBar.style.width = '40%';
+                    clonturkPossessionBar.className = "bg-[#FF69B4] h-full";
+                    clonturkPossessionBar.style.width = '35%';
                 }
                 if (mountTemplePossessionBar) {
-                    mountTemplePossessionBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTemplePossessionBar.style.width = '60%';
+                    mountTemplePossessionBar.className = "bg-[#001C48] h-full ml-auto";
+                    mountTemplePossessionBar.style.width = '65%';
                 }
 
-                if (clonturkShotsVal) clonturkShotsVal.innerText = "6";
-                if (mountTempleShotsVal) mountTempleShotsVal.innerText = "7";
+                if (clonturkShotsVal) clonturkShotsVal.innerText = "4";
+                if (mountTempleShotsVal) mountTempleShotsVal.innerText = "16";
                 if (clonturkShotsBar) {
-                    clonturkShotsBar.className = "bg-yellow-400 h-full";
-                    clonturkShotsBar.style.width = '46%';
+                    clonturkShotsBar.className = "bg-[#FF69B4] h-full";
+                    clonturkShotsBar.style.width = '20%';
                 }
                 if (mountTempleShotsBar) {
-                    mountTempleShotsBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTempleShotsBar.style.width = '54%';
+                    mountTempleShotsBar.className = "bg-[#001C48] h-full ml-auto";
+                    mountTempleShotsBar.style.width = '80%';
                 }
 
-                if (clonturkOnTargetVal) clonturkOnTargetVal.innerText = "5";
-                if (mountTempleOnTargetVal) mountTempleOnTargetVal.innerText = "6";
+                if (clonturkOnTargetVal) clonturkOnTargetVal.innerText = "3";
+                if (mountTempleOnTargetVal) mountTempleOnTargetVal.innerText = "14";
                 if (clonturkOnTargetBar) {
-                    clonturkOnTargetBar.className = "bg-yellow-400 h-full";
-                    clonturkOnTargetBar.style.width = '45%';
+                    clonturkOnTargetBar.className = "bg-[#FF69B4] h-full";
+                    clonturkOnTargetBar.style.width = '18%';
                 }
                 if (mountTempleOnTargetBar) {
-                    mountTempleOnTargetBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTempleOnTargetBar.style.width = '55%';
+                    mountTempleOnTargetBar.className = "bg-[#001C48] h-full ml-auto";
+                    mountTempleOnTargetBar.style.width = '82%';
                 }
 
-                // Summary configuration (Match 1)
-                if (summaryTitle) summaryTitle.innerText = "5 - 2 win on the first match";
-                if (summaryText) summaryText.innerText = "This match was definitely interesting even with 4 minutes as Dima secured victory for his team. When Joshua scored a quick hattrick and Dima got a goal, Jack and Patrick started pressuring Joshua and Dima and got the game to 4 - 2 but then Dima got the brace and secured first round for Joshua and Dima.";
+                if (summaryTitle) summaryTitle.innerText = "The first ever club World Cup ever played";
+                if (summaryText) summaryText.innerText = "The first ever club World Cup ever played and it was definitely a major upset for clonturk as Mount Temple FC II managed to get a whole 10 goals against them. Everyone had a great performance on Mount Temple today but Clonturk had a bit of a weaker performance today.";
 
-                if (lineupImage) lineupImage.setAttribute("src", "Lineup52.png");
-                if (lineupsText) lineupsText.innerText = "Lineups of Match 1.";
+                if (lineupImage) lineupImage.setAttribute("src", "Lineup103.png");
+                if (lineupsText) lineupsText.innerText = "Lineups of CWC concluded game.";
 
-                // Head to head dynamic loading
-                if (h2hHomeWins) h2hHomeWins.innerText = "2";
-                if (h2hAwayWins) h2hAwayWins.innerText = "0";
-                if (h2hHomeBadgeImg) h2hHomeBadgeImg.style.display = 'none';
-                if (h2hAwayBadgeImg) h2hAwayBadgeImg.style.display = 'none';
-                if (h2hHomeBadgeFallback) {
-                    h2hHomeBadgeFallback.className = "text-yellow-950 font-black";
-                    h2hHomeBadgeFallback.innerText = "JD";
-                    h2hHomeBadgeFallback.classList.remove('hidden');
+                if (h2hHomeWins) h2hHomeWins.innerText = "0";
+                if (h2hAwayWins) h2hAwayWins.innerText = "3";
+                if (h2hHomeBadgeImg) {
+                    h2hHomeBadgeImg.setAttribute('src', 'Clonturk.png');
+                    h2hHomeBadgeImg.style.display = 'block';
                 }
-                if (h2hAwayBadgeFallback) {
-                    h2hAwayBadgeFallback.className = "text-blue-900 font-black";
-                    h2hAwayBadgeFallback.innerText = "JP";
-                    h2hAwayBadgeFallback.classList.remove('hidden');
+                if (h2hAwayBadgeImg) {
+                    h2hAwayBadgeImg.setAttribute('src', 'MountTemple.png');
+                    h2hAwayBadgeImg.style.display = 'block';
                 }
+                if (h2hHomeBadgeFallback) h2hHomeBadgeFallback.classList.add('hidden');
+                if (h2hAwayBadgeFallback) h2hAwayBadgeFallback.classList.add('hidden');
                 if (h2hPreviousEncountersList) {
                     h2hPreviousEncountersList.innerHTML = `
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
-                            <span class="text-gray-400 font-medium">Sun 7 June, 15:45</span>
+                            <span class="text-gray-400 font-medium">Sun 14 June, 13:30</span>
                             <span class="font-medium text-gray-700">
-                                Joshua & Dima <span class="font-bold text-gray-900">5 - 3</span> Patrick & Jack
+                                Clonturk FC II <span class="font-bold text-gray-900">3 - 10</span> Mount Temple FC II
                             </span>
-                            <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Match 2</span>
+                            <span class="text-[#001C48] bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">CWC Match</span>
                         </div>
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
-                            <span class="text-gray-400 font-medium">Sun 7 June, 15:00</span>
+                            <span class="text-gray-400 font-medium">4 Jun 2026</span>
                             <span class="font-medium text-gray-700">
-                                Joshua & Dima <span class="font-bold text-gray-900">5 - 2</span> Patrick & Jack
+                                Clonturk FC II <span class="font-bold text-gray-900">2 - 3</span> Mount Temple FC II
                             </span>
-                            <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Match 1</span>
+                            <span class="text-[#001C48] bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Friendly Match</span>
                         </div>
                     `;
                 }
-
-            } else if (matchType === 'jd-jp-2') {
-                // Joshua & Dima vs Patrick & Jack - Match 2 (5 - 3)
-                if (leagueTitle) leagueTitle.innerText = "IGG Friendlies (Match 2)";
-                if (metaDate) metaDate.innerText = "Sun 7 June, 15:45";
-                if (metaLocation) metaLocation.innerText = "DCU Soccer Centre";
-                if (matchStatusLabel) matchStatusLabel.innerText = "Full Time";
-                if (matchScoreDisplay) matchScoreDisplay.innerText = "5 - 3";
-
-                // Navigation Arrows configuration
-                if (navLeftArrowBtn) navLeftArrowBtn.classList.remove('hidden');
-                if (navRightArrowBtn) navRightArrowBtn.classList.remove('hidden');
-
-                // Badge swaps
-                if (homeTeamName) homeTeamName.innerText = "Joshua & Dima";
-                if (awayTeamName) awayTeamName.innerText = "Patrick & Jack";
-                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-yellow-400 border border-yellow-500";
-                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-100 border border-blue-250";
-                if (homeBadgeImg) homeBadgeImg.style.display = 'none';
-                if (awayBadgeImg) awayBadgeImg.style.display = 'none';
-                if (homeBadgeFallback) {
-                    homeBadgeFallback.className = "text-yellow-950 font-black text-xs sm:text-sm md:text-base";
-                    homeBadgeFallback.innerText = "JD";
-                    homeBadgeFallback.classList.remove('hidden');
-                }
-                if (awayBadgeFallback) {
-                    awayBadgeFallback.className = "text-blue-900 font-black text-xs sm:text-sm md:text-base";
-                    awayBadgeFallback.innerText = "JP";
-                    awayBadgeFallback.classList.remove('hidden');
-                }
-
-                // Scorers with Jack's OG
-                if (clonturkScorersList) {
-                    clonturkScorersList.innerHTML = `
-                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">1'</span></p>
-                        <p class="font-semibold text-gray-800">Jack (OG) <span class="text-gray-400 font-normal">2'</span></p>
-                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">3'</span></p>
-                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">4'</span></p>
-                        <p class="font-semibold text-gray-800">Dima <span class="text-gray-400 font-normal">6'</span></p>
-                    `;
-                }
-                if (mountTempleScorersList) {
-                    mountTempleScorersList.innerHTML = `
-                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'2</span> Jack</p>
-                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'4</span> Patrick</p>
-                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'5</span> Patrick</p>
-                    `;
-                }
-
-                // Match Info Facts
-                if (factLocationText) factLocationText.innerText = "DCU Soccer Centre, Whitehall, Dublin";
-                if (factBallText) factBallText.innerText = "Size 5 White Sondico Meteor Football";
-                if (locationHoverRow) locationHoverRow.setAttribute("onclick", "window.open('https://maps.app.goo.gl/cqTvdnq8Kz5xuntD7', '_blank')");
-                if (surfaceText) surfaceText.innerText = "Astro";
-                if (weatherDisplay) weatherDisplay.innerText = "Cloudy/Windy, 16°C";
-
-                // Ball specpopup Meteor config
-                if (modalBallTitle) modalBallTitle.innerText = "Sondico Meteor";
-                if (modalBallModel) modalBallModel.innerText = "Meteor";
-                if (ballConditionDisplay) ballConditionDisplay.innerText = "Brand New";
-                if (modalBallImage) modalBallImage.setAttribute("src", "SondicoMeteorSize5.avif");
-                if (colorOptionsDropdown) colorOptionsDropdown.innerHTML = colorways.meteor;
-
-                // Probability adjusted heavily to Joshua & Dima
-                if (clonturkProbTitle) clonturkProbTitle.innerText = "Joshua & Dima Win";
-                if (clonturkProbTitle) clonturkProbTitle.className = "font-bold text-yellow-500";
-                if (mountTempleProbTitle) mountTempleProbTitle.innerText = "Patrick & Jack Win";
-                if (mountTempleProbTitle) mountTempleProbTitle.className = "font-bold text-blue-900";
-
-                if (clonturkProbBar) {
-                    clonturkProbBar.className = "bg-yellow-400 h-full";
-                    clonturkProbBar.style.width = '60%';
-                }
-                if (drawProbBar) drawProbBar.style.width = '10%';
-                if (mountTempleProbBar) {
-                    mountTempleProbBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTempleProbBar.style.width = '30%';
-                }
-                if (clonturkProbText) clonturkProbText.innerText = "Joshua & Dima: 60%";
-                if (drawProbText) drawProbText.innerText = "Draw: 10%";
-                if (mountTempleProbText) mountTempleProbText.innerText = "Patrick & Jack: 30%";
-
-                // Stats tab details config (JP has slightly more possession)
-                if (statsMain) statsMain.classList.remove('hidden');
-                if (statsUnavailable) statsUnavailable.classList.add('hidden');
-
-                if (clonturkPossessionVal) clonturkPossessionVal.innerText = "45%";
-                if (mountTemplePossessionVal) mountTemplePossessionVal.innerText = "55%";
-                if (clonturkPossessionBar) {
-                    clonturkPossessionBar.className = "bg-yellow-400 h-full";
-                    clonturkPossessionBar.style.width = '45%';
-                }
-                if (mountTemplePossessionBar) {
-                    mountTemplePossessionBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTemplePossessionBar.style.width = '55%';
-                }
-
-                // PJ has 1 more shot and shot on target than JD (8 shots vs 9 shots)
-                if (clonturkShotsVal) clonturkShotsVal.innerText = "8";
-                if (mountTempleShotsVal) mountTempleShotsVal.innerText = "9";
-                if (clonturkShotsBar) {
-                    clonturkShotsBar.className = "bg-yellow-400 h-full";
-                    clonturkShotsBar.style.width = '47%';
-                }
-                if (mountTempleShotsBar) {
-                    mountTempleShotsBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTempleShotsBar.style.width = '53%';
-                }
-
-                if (clonturkOnTargetVal) clonturkOnTargetVal.innerText = "7";
-                if (mountTempleOnTargetVal) mountTempleOnTargetVal.innerText = "8";
-                if (clonturkOnTargetBar) {
-                    clonturkOnTargetBar.className = "bg-yellow-400 h-full";
-                    clonturkOnTargetBar.style.width = '47%';
-                }
-                if (mountTempleOnTargetBar) {
-                    mountTempleOnTargetBar.className = "bg-blue-800 h-full ml-auto";
-                    mountTempleOnTargetBar.style.width = '53%';
-                }
-
-                // Summary configuration (Match 2 / Competition Conclusion)
-                if (summaryTitle) summaryTitle.innerText = "Joshua and Dima win the first to 3 competition!";
-                if (summaryText) summaryText.innerText = "Joshua and Dima won 2 games out of 3 with a brilliantly played game from both sides. Joshua managed to get a hattrick once again while Patrick got a brace this time. When the score was 1 - 1 jack was trying to pass the ball back to Patrick but Patrick didn’t expect the pass and it accidentally rolled into the goal making it a unfortunate own goal for Jack. The game was very good and it took longer for each side to score as they where both playing good but then when the score was 4 - 3 Dima received a great ball from Joshua and he scored it securing the first to 3 tournament for them.";
-
-                if (lineupImage) lineupImage.setAttribute("src", "Lineup53.png");
-                if (lineupsText) lineupsText.innerText = "Lineups of Match 2.";
-
-                // Head to head dynamic loading
-                if (h2hHomeWins) h2hHomeWins.innerText = "2";
-                if (h2hAwayWins) h2hAwayWins.innerText = "0";
-                if (h2hHomeBadgeImg) h2hHomeBadgeImg.style.display = 'none';
-                if (h2hAwayBadgeImg) h2hAwayBadgeImg.style.display = 'none';
-                if (h2hHomeBadgeFallback) {
-                    h2hHomeBadgeFallback.className = "text-yellow-950 font-black";
-                    h2hHomeBadgeFallback.innerText = "JD";
-                    h2hHomeBadgeFallback.classList.remove('hidden');
-                }
-                if (h2hAwayBadgeFallback) {
-                    h2hAwayBadgeFallback.className = "text-blue-900 font-black";
-                    h2hAwayBadgeFallback.innerText = "JP";
-                    h2hAwayBadgeFallback.classList.remove('hidden');
-                }
-                if (h2hPreviousEncountersList) {
-                    h2hPreviousEncountersList.innerHTML = `
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
-                            <span class="text-gray-400 font-medium">Sun 7 June, 15:45</span>
-                            <span class="font-medium text-gray-700">
-                                Joshua & Dima <span class="font-bold text-gray-900">5 - 3</span> Patrick & Jack
-                            </span>
-                            <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Match 2</span>
-                        </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
-                            <span class="text-gray-400 font-medium">Sun 7 June, 15:00</span>
-                            <span class="font-medium text-gray-700">
-                                Joshua & Dima <span class="font-bold text-gray-900">5 - 2</span> Patrick & Jack
-                            </span>
-                            <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Match 1</span>
-                        </div>
-                    `;
-                }
-
-            } else if (matchType === 'jd-jp-overall') {
-                // Aggregate Series View
-                if (leagueTitle) leagueTitle.innerText = "IGG Series Overall";
-                if (metaDate) metaDate.innerText = "Sunday 7 June";
-                if (metaLocation) metaLocation.innerText = "DCU Soccer Centre";
-                if (matchStatusLabel) matchStatusLabel.innerText = "Series Complete";
-                if (matchScoreDisplay) matchScoreDisplay.innerText = "10 - 5";
-
-                // Left Arrow visible
-                if (navLeftArrowBtn) navLeftArrowBtn.classList.remove('hidden');
-
-                // Header custom name updates
-                if (homeTeamName) homeTeamName.innerText = "Joshua & Dima";
-                if (awayTeamName) awayTeamName.innerText = "Patrick & Jack";
-                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-yellow-400 border border-yellow-500";
-                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-100 border border-blue-250";
-                if (homeBadgeImg) homeBadgeImg.style.display = 'none';
-                if (awayBadgeImg) awayBadgeImg.style.display = 'none';
-                if (homeBadgeFallback) {
-                    homeBadgeFallback.className = "text-yellow-950 font-black text-xs sm:text-sm md:text-base";
-                    homeBadgeFallback.innerText = "JD";
-                    homeBadgeFallback.classList.remove('hidden');
-                }
-                if (awayBadgeFallback) {
-                    awayBadgeFallback.className = "text-blue-900 font-black text-xs sm:text-sm md:text-base";
-                    awayBadgeFallback.innerText = "JP";
-                    awayBadgeFallback.classList.remove('hidden');
-                }
-
-                // Hide typical sub scorers area & Tab interface to present the full aggregated match flow
-                if (scorersGrid) scorersGrid.classList.add('hidden');
-                if (detailsTabsBar) detailsTabsBar.classList.add('hidden');
-                if (detailsContentArea) detailsContentArea.classList.add('hidden');
-                if (overallMatchSummary) overallMatchSummary.classList.remove('hidden');
-
-            } else if (matchType === 'preseason') {
+            }
+            // ----------------------------------------------------
+            // 2) Pre-Seasonal Match (6 - 6) Routing
+            // ----------------------------------------------------
+            else if (matchType === 'preseason') {
                 if (leagueTitle) leagueTitle.innerText = "IGG Pre-Seasonal Match";
                 if (metaDate) metaDate.innerText = "Wednesday 26 April";
                 if (metaLocation) metaLocation.innerText = "Albert College Park Soccer Pitches";
@@ -1594,7 +1447,7 @@
 
                 // Head to Head standard
                 if (h2hHomeWins) h2hHomeWins.innerText = "0";
-                if (h2hAwayWins) h2hAwayWins.innerText = "2";
+                if (h2hAwayWins) h2hAwayWins.innerText = "3";
                 if (h2hHomeBadgeImg) {
                     h2hHomeBadgeImg.setAttribute('src', 'Clonturk.png');
                     h2hHomeBadgeImg.style.display = 'block';
@@ -1608,102 +1461,371 @@
                 if (h2hPreviousEncountersList) {
                     h2hPreviousEncountersList.innerHTML = `
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
+                            <span class="text-gray-400 font-medium">Sun 14 June, 13:30</span>
+                            <span class="font-medium text-gray-700">
+                                Clonturk FC II <span class="font-bold text-gray-900">3 - 10</span> Mount Temple FC II
+                            </span>
+                            <span class="text-[#001C48] bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">CWC Match</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
                             <span class="text-gray-400 font-medium">4 Jun 2026</span>
                             <span class="font-medium text-gray-700">
                                 Clonturk FC II <span class="font-bold text-gray-900">2 - 3</span> Mount Temple FC II
                             </span>
-                            <span class="text-[#001C48] bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">
-                                Friendly Match
-                            </span>
-                        </div>
-                        <div onclick="showMatch('preseason')" class="group relative flex justify-between items-center py-2.5 border-b border-gray-50 overflow-hidden cursor-pointer h-12 transition-all duration-300">
-                            <div class="w-full flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm gap-2 transition-all duration-300 transform group-hover:-translate-y-8 group-hover:opacity-0">
-                                <span class="text-gray-400 font-medium">26 Apr 2026</span>
-                                <span class="font-medium text-gray-700">
-                                    Clonturk FC II <span class="font-bold text-gray-900">6 - 6</span> Mount Temple FC II 
-                                    <span class="text-xs text-blue-900 font-semibold block sm:inline sm:ml-1">(0 - 2 on penalties)</span>
-                                </span>
-                                <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">
-                                    Pre-Seasonal Match
-                                </span>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center transition-all duration-300 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bg-blue-50/80 rounded-xl">
-                                <span class="text-blue-700 font-extrabold text-xs tracking-wider uppercase flex items-center gap-1.5 font-bold">
-                                    View Match
-                                </span>
-                            </div>
+                            <span class="text-[#001C48] bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Friendly Match</span>
                         </div>
                     `;
                 }
-
-            } else if (matchType === 'upcoming') {
-                if (leagueTitle) leagueTitle.innerText = "IGG Club World Cup";
-                if (metaDate) metaDate.innerText = "Date and time: TBD";
+            }
+            // ----------------------------------------------------
+            // 3) JD vs JP - Match 1 (5 - 2) Routing
+            // ----------------------------------------------------
+            else if (matchType === 'jd-jp-1') {
+                if (leagueTitle) leagueTitle.innerText = "IGG Friendlies (Match 1)";
+                if (metaDate) metaDate.innerText = "Sun 7 June, 15:00";
                 if (metaLocation) metaLocation.innerText = "DCU Soccer Centre";
-                if (matchStatusLabel) matchStatusLabel.innerText = "Upcoming";
-                if (matchScoreDisplay) matchScoreDisplay.innerText = "TBD";
-                if (scorersGrid) scorersGrid.classList.add('hidden');
+                if (matchStatusLabel) matchStatusLabel.innerText = "Full Time";
+                if (matchScoreDisplay) matchScoreDisplay.innerText = "5 - 2";
 
-                if (homeTeamName) homeTeamName.innerText = "Clonturk FC II";
-                if (awayTeamName) awayTeamName.innerText = "Mount Temple FC II";
-                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-pink-50 border border-pink-100";
-                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-50 border border-blue-100";
-                if (homeBadgeImg) {
-                    homeBadgeImg.setAttribute('src', 'Clonturk.png');
-                    homeBadgeImg.style.display = 'block';
-                }
-                if (awayBadgeImg) {
-                    awayBadgeImg.setAttribute('src', 'MountTemple.png');
-                    awayBadgeImg.style.display = 'block';
-                }
-                if (homeBadgeFallback) homeBadgeFallback.classList.add('hidden');
-                if (awayBadgeFallback) awayBadgeFallback.classList.add('hidden');
+                // Right navigation arrow active
+                if (navRightArrowBtn) navRightArrowBtn.classList.remove('hidden');
 
+                // Badge team setups
+                if (homeTeamName) homeTeamName.innerText = "Joshua & Dima";
+                if (awayTeamName) awayTeamName.innerText = "Patrick & Jack";
+                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-yellow-400 border border-yellow-500";
+                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-100 border border-blue-250";
+                if (homeBadgeImg) homeBadgeImg.style.display = 'none';
+                if (awayBadgeImg) awayBadgeImg.style.display = 'none';
+                if (homeBadgeFallback) {
+                    homeBadgeFallback.className = "text-yellow-950 font-black text-xs sm:text-sm md:text-base";
+                    homeBadgeFallback.innerText = "JD";
+                    homeBadgeFallback.classList.remove('hidden');
+                }
+                if (awayBadgeFallback) {
+                    awayBadgeFallback.className = "text-blue-900 font-black text-xs sm:text-sm md:text-base";
+                    awayBadgeFallback.innerText = "JP";
+                    awayBadgeFallback.classList.remove('hidden');
+                }
+
+                // Scorers
+                if (clonturkScorersList) {
+                    clonturkScorersList.innerHTML = `
+                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">1'</span></p>
+                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">2'</span></p>
+                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">2'</span></p>
+                        <p class="font-semibold text-gray-800">Dima <span class="text-gray-400 font-normal">3'</span></p>
+                        <p class="font-semibold text-gray-800">Dima <span class="text-gray-400 font-normal">4'</span></p>
+                    `;
+                }
+                if (mountTempleScorersList) {
+                    mountTempleScorersList.innerHTML = `
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'3</span> Jack</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'4</span> Patrick</p>
+                    `;
+                }
+
+                // Match Info Facts
                 if (factLocationText) factLocationText.innerText = "DCU Soccer Centre, Whitehall, Dublin";
                 if (factBallText) factBallText.innerText = "Size 5 White Sondico Meteor Football";
                 if (locationHoverRow) locationHoverRow.setAttribute("onclick", "window.open('https://maps.app.goo.gl/cqTvdnq8Kz5xuntD7', '_blank')");
                 if (surfaceText) surfaceText.innerText = "Astro";
-                if (weatherDisplay) weatherDisplay.innerText = "No Data";
+                if (weatherDisplay) weatherDisplay.innerText = "Cloudy/Windy, 16°C";
 
+                // Ball specpopup Meteor config
                 if (modalBallTitle) modalBallTitle.innerText = "Sondico Meteor";
                 if (modalBallModel) modalBallModel.innerText = "Meteor";
-                if (ballConditionDisplay) ballConditionDisplay.innerText = "Basically Brand New";
+                if (ballConditionDisplay) ballConditionDisplay.innerText = "Brand New";
                 if (modalBallImage) modalBallImage.setAttribute("src", "SondicoMeteorSize5.avif");
                 if (colorOptionsDropdown) colorOptionsDropdown.innerHTML = colorways.meteor;
 
-                if (selectedCircle) selectedCircle.className = "w-4 h-4 rounded-full bg-white border border-gray-300 shadow-sm transition-all duration-300";
-                if (selectedName) selectedName.innerText = "White";
-
-                if (clonturkProbTitle) clonturkProbTitle.innerText = "Clonturk Win";
-                if (clonturkProbTitle) clonturkProbTitle.className = "font-bold text-[#FF69B4]";
-                if (mountTempleProbTitle) mountTempleProbTitle.innerText = "Mount Temple Win";
-                if (mountTempleProbTitle) mountTempleProbTitle.className = "font-bold text-[#001C48]";
+                // Probability even settings
+                if (clonturkProbTitle) clonturkProbTitle.innerText = "Joshua & Dima Win";
+                if (clonturkProbTitle) clonturkProbTitle.className = "font-bold text-yellow-500";
+                if (mountTempleProbTitle) mountTempleProbTitle.innerText = "Patrick & Jack Win";
+                if (mountTempleProbTitle) mountTempleProbTitle.className = "font-bold text-blue-900";
 
                 if (clonturkProbBar) {
-                    clonturkProbBar.className = "bg-[#FF69B4] h-full";
-                    clonturkProbBar.style.width = '35%';
+                    clonturkProbBar.className = "bg-yellow-400 h-full";
+                    clonturkProbBar.style.width = '45%';
                 }
                 if (drawProbBar) drawProbBar.style.width = '10%';
                 if (mountTempleProbBar) {
-                    mountTempleProbBar.className = "bg-[#001C48] h-full ml-auto";
-                    mountTempleProbBar.style.width = '55%';
+                    mountTempleProbBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTempleProbBar.style.width = '45%';
                 }
-                if (clonturkProbText) clonturkProbText.innerText = "Clonturk: 35%";
+                if (clonturkProbText) clonturkProbText.innerText = "Joshua & Dima: 45%";
                 if (drawProbText) drawProbText.innerText = "Draw: 10%";
-                if (mountTempleProbText) mountTempleProbText.innerText = "Mount Temple: 55%";
+                if (mountTempleProbText) mountTempleProbText.innerText = "Patrick & Jack: 45%";
 
-                if (statsMain) statsMain.classList.add('hidden');
-                if (statsUnavailable) statsUnavailable.classList.remove('hidden');
+                if (statsMain) statsMain.classList.remove('hidden');
+                if (statsUnavailable) statsUnavailable.classList.add('hidden');
 
-                // Summary configuration (Upcoming CWC Match)
-                if (summaryTitle) summaryTitle.innerText = "Summary Unavailable";
-                if (summaryText) summaryText.innerText = "This match has not concluded yet. Summary will be posted after full time.";
+                if (clonturkPossessionVal) clonturkPossessionVal.innerText = "40%";
+                if (mountTemplePossessionVal) mountTemplePossessionVal.innerText = "60%";
+                if (clonturkPossessionBar) {
+                    clonturkPossessionBar.className = "bg-yellow-400 h-full";
+                    clonturkPossessionBar.style.width = '40%';
+                }
+                if (mountTemplePossessionBar) {
+                    mountTemplePossessionBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTemplePossessionBar.style.width = '60%';
+                }
 
-                if (lineupImage) lineupImage.setAttribute("src", "Lineup32.png");
-                if (lineupsText) lineupsText.innerText = "Lineups will be posted after the game.";
+                if (clonturkShotsVal) clonturkShotsVal.innerText = "6";
+                if (mountTempleShotsVal) mountTempleShotsVal.innerText = "7";
+                if (clonturkShotsBar) {
+                    clonturkShotsBar.className = "bg-yellow-400 h-full";
+                    clonturkShotsBar.style.width = '46%';
+                }
+                if (mountTempleShotsBar) {
+                    mountTempleShotsBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTempleShotsBar.style.width = '54%';
+                }
 
-            } else {
-                // Completed Friendly Match (2-3)
+                if (clonturkOnTargetVal) clonturkOnTargetVal.innerText = "5";
+                if (mountTempleOnTargetVal) mountTempleOnTargetVal.innerText = "6";
+                if (clonturkOnTargetBar) {
+                    clonturkOnTargetBar.className = "bg-yellow-400 h-full";
+                    clonturkOnTargetBar.style.width = '45%';
+                }
+                if (mountTempleOnTargetBar) {
+                    mountTempleOnTargetBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTempleOnTargetBar.style.width = '55%';
+                }
+
+                // Summary configuration (Match 1)
+                if (summaryTitle) summaryTitle.innerText = "5 - 2 win on the first match";
+                if (summaryText) summaryText.innerText = "This match was definitely interesting even with 4 minutes as Dima secured victory for his team. When Joshua scored a quick hattrick and Dima got a goal, Jack and Patrick started pressuring Joshua and Dima and got the game to 4 - 2 but then Dima got the brace and secured first round for Joshua and Dima.";
+
+                if (lineupImage) lineupImage.setAttribute("src", "Lineup52.png");
+                if (lineupsText) lineupsText.innerText = "Lineups of Match 1.";
+
+                if (h2hHomeWins) h2hHomeWins.innerText = "2";
+                if (h2hAwayWins) h2hAwayWins.innerText = "0";
+                if (h2hHomeBadgeImg) h2hHomeBadgeImg.style.display = 'none';
+                if (h2hAwayBadgeImg) h2hAwayBadgeImg.style.display = 'none';
+                if (h2hHomeBadgeFallback) {
+                    h2hHomeBadgeFallback.className = "text-yellow-950 font-black";
+                    h2hHomeBadgeFallback.innerText = "JD";
+                    h2hHomeBadgeFallback.classList.remove('hidden');
+                }
+                if (h2hAwayBadgeFallback) {
+                    h2hAwayBadgeFallback.className = "text-blue-900 font-black";
+                    h2hAwayBadgeFallback.innerText = "JP";
+                    h2hAwayBadgeFallback.classList.remove('hidden');
+                }
+                if (h2hPreviousEncountersList) {
+                    h2hPreviousEncountersList.innerHTML = `
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
+                            <span class="text-gray-400 font-medium">Sun 7 June, 15:45</span>
+                            <span class="font-medium text-gray-700">
+                                Joshua & Dima <span class="font-bold text-gray-900">5 - 3</span> Patrick & Jack
+                            </span>
+                            <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Match 2</span>
+                        </div>
+                    `;
+                }
+            }
+            // ----------------------------------------------------
+            // 4) JD vs JP - Match 2 (5 - 3) Routing
+            // ----------------------------------------------------
+            else if (matchType === 'jd-jp-2') {
+                if (leagueTitle) leagueTitle.innerText = "IGG Friendlies (Match 2)";
+                if (metaDate) metaDate.innerText = "Sun 7 June, 15:45";
+                if (metaLocation) metaLocation.innerText = "DCU Soccer Centre";
+                if (matchStatusLabel) matchStatusLabel.innerText = "Full Time";
+                if (matchScoreDisplay) matchScoreDisplay.innerText = "5 - 3";
+
+                // Left and Right navigation arrows active
+                if (navLeftArrowBtn) navLeftArrowBtn.classList.remove('hidden');
+                if (navRightArrowBtn) navRightArrowBtn.classList.remove('hidden');
+
+                // Badge swaps
+                if (homeTeamName) homeTeamName.innerText = "Joshua & Dima";
+                if (awayTeamName) awayTeamName.innerText = "Patrick & Jack";
+                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-yellow-400 border border-yellow-500";
+                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-100 border border-blue-250";
+                if (homeBadgeImg) homeBadgeImg.style.display = 'none';
+                if (awayBadgeImg) awayBadgeImg.style.display = 'none';
+                if (homeBadgeFallback) {
+                    homeBadgeFallback.className = "text-yellow-950 font-black text-xs sm:text-sm md:text-base";
+                    homeBadgeFallback.innerText = "JD";
+                    homeBadgeFallback.classList.remove('hidden');
+                }
+                if (awayBadgeFallback) {
+                    awayBadgeFallback.className = "text-blue-900 font-black text-xs sm:text-sm md:text-base";
+                    awayBadgeFallback.innerText = "JP";
+                    awayBadgeFallback.classList.remove('hidden');
+                }
+
+                // Scorers
+                if (clonturkScorersList) {
+                    clonturkScorersList.innerHTML = `
+                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">1'</span></p>
+                        <p class="font-semibold text-gray-800">Jack (OG) <span class="text-gray-400 font-normal">2'</span></p>
+                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">3'</span></p>
+                        <p class="font-semibold text-gray-800">Joshua <span class="text-gray-400 font-normal">4'</span></p>
+                        <p class="font-semibold text-gray-800">Dima <span class="text-gray-400 font-normal">6'</span></p>
+                    `;
+                }
+                if (mountTempleScorersList) {
+                    mountTempleScorersList.innerHTML = `
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'2</span> Jack</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'4</span> Patrick</p>
+                        <p class="font-semibold text-gray-800"><span class="text-gray-400 font-normal">'5</span> Patrick</p>
+                    `;
+                }
+
+                // Match Info Facts
+                if (factLocationText) factLocationText.innerText = "DCU Soccer Centre, Whitehall, Dublin";
+                if (factBallText) factBallText.innerText = "Size 5 White Sondico Meteor Football";
+                if (locationHoverRow) locationHoverRow.setAttribute("onclick", "window.open('https://maps.app.goo.gl/cqTvdnq8Kz5xuntD7', '_blank')");
+                if (surfaceText) surfaceText.innerText = "Astro";
+                if (weatherDisplay) weatherDisplay.innerText = "Cloudy/Windy, 16°C";
+
+                // Ball specpopup Meteor config
+                if (modalBallTitle) modalBallTitle.innerText = "Sondico Meteor";
+                if (modalBallModel) modalBallModel.innerText = "Meteor";
+                if (ballConditionDisplay) ballConditionDisplay.innerText = "Brand New";
+                if (modalBallImage) modalBallImage.setAttribute("src", "SondicoMeteorSize5.avif");
+                if (colorOptionsDropdown) colorOptionsDropdown.innerHTML = colorways.meteor;
+
+                // Probability adjusted heavily to Joshua & Dima
+                if (clonturkProbTitle) clonturkProbTitle.innerText = "Joshua & Dima Win";
+                if (clonturkProbTitle) clonturkProbTitle.className = "font-bold text-yellow-500";
+                if (mountTempleProbTitle) mountTempleProbTitle.innerText = "Patrick & Jack Win";
+                if (mountTempleProbTitle) mountTempleProbTitle.className = "font-bold text-blue-900";
+
+                if (clonturkProbBar) {
+                    clonturkProbBar.className = "bg-yellow-400 h-full";
+                    clonturkProbBar.style.width = '60%';
+                }
+                if (drawProbBar) drawProbBar.style.width = '10%';
+                if (mountTempleProbBar) {
+                    mountTempleProbBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTempleProbBar.style.width = '30%';
+                }
+                if (clonturkProbText) clonturkProbText.innerText = "Joshua & Dima: 60%";
+                if (drawProbText) drawProbText.innerText = "Draw: 10%";
+                if (mountTempleProbText) mountTempleProbText.innerText = "Patrick & Jack: 30%";
+
+                if (statsMain) statsMain.classList.remove('hidden');
+                if (statsUnavailable) statsUnavailable.classList.add('hidden');
+
+                if (clonturkPossessionVal) clonturkPossessionVal.innerText = "45%";
+                if (mountTemplePossessionVal) mountTemplePossessionVal.innerText = "55%";
+                if (clonturkPossessionBar) {
+                    clonturkPossessionBar.className = "bg-yellow-400 h-full";
+                    clonturkPossessionBar.style.width = '45%';
+                }
+                if (mountTemplePossessionBar) {
+                    mountTemplePossessionBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTemplePossessionBar.style.width = '55%';
+                }
+
+                if (clonturkShotsVal) clonturkShotsVal.innerText = "8";
+                if (mountTempleShotsVal) mountTempleShotsVal.innerText = "9";
+                if (clonturkShotsBar) {
+                    clonturkShotsBar.className = "bg-yellow-400 h-full";
+                    clonturkShotsBar.style.width = '47%';
+                }
+                if (mountTempleShotsBar) {
+                    mountTempleShotsBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTempleShotsBar.style.width = '53%';
+                }
+
+                if (clonturkOnTargetVal) clonturkOnTargetVal.innerText = "7";
+                if (mountTempleOnTargetVal) mountTempleOnTargetVal.innerText = "8";
+                if (clonturkOnTargetBar) {
+                    clonturkOnTargetBar.className = "bg-yellow-400 h-full";
+                    clonturkOnTargetBar.style.width = '47%';
+                }
+                if (mountTempleOnTargetBar) {
+                    mountTempleOnTargetBar.className = "bg-blue-800 h-full ml-auto";
+                    mountTempleOnTargetBar.style.width = '53%';
+                }
+
+                // Summary configuration (Match 2 / Competition Conclusion)
+                if (summaryTitle) summaryTitle.innerText = "Joshua and Dima win the first to 3 competition!";
+                if (summaryText) summaryText.innerText = "Joshua and Dima won 2 games out of 3 with a brilliantly played game from both sides. Joshua managed to get a hattrick once again while Patrick got a brace this time. When the score was 1 - 1 jack was trying to pass the ball back to Patrick but Patrick didn’t expect the pass and it accidentally rolled into the goal making it a unfortunate own goal for Jack. The game was very good and it took longer for each side to score as they where both playing good but then when the score was 4 - 3 Dima received a great ball from Joshua and he scored it securing the first to 3 tournament for them.";
+
+                if (lineupImage) lineupImage.setAttribute("src", "Lineup53.png");
+                if (lineupsText) lineupsText.innerText = "Lineups of Match 2.";
+
+                if (h2hHomeWins) h2hHomeWins.innerText = "2";
+                if (h2hAwayWins) h2hAwayWins.innerText = "0";
+                if (h2hHomeBadgeImg) h2hHomeBadgeImg.style.display = 'none';
+                if (h2hAwayBadgeImg) h2hAwayBadgeImg.style.display = 'none';
+                if (h2hHomeBadgeFallback) {
+                    h2hHomeBadgeFallback.className = "text-yellow-950 font-black";
+                    h2hHomeBadgeFallback.innerText = "JD";
+                    h2hHomeBadgeFallback.classList.remove('hidden');
+                }
+                if (h2hAwayBadgeFallback) {
+                    h2hAwayBadgeFallback.className = "text-blue-900 font-black";
+                    h2hAwayBadgeFallback.innerText = "JP";
+                    h2hAwayBadgeFallback.classList.remove('hidden');
+                }
+                if (h2hPreviousEncountersList) {
+                    h2hPreviousEncountersList.innerHTML = `
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
+                            <span class="text-gray-400 font-medium">Sun 7 June, 15:45</span>
+                            <span class="font-medium text-gray-700">
+                                Joshua & Dima <span class="font-bold text-gray-900">5 - 3</span> Patrick & Jack
+                            </span>
+                            <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Match 2</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm border-b border-gray-50 pb-2.5 gap-2">
+                            <span class="text-gray-400 font-medium">Sun 7 June, 15:00</span>
+                            <span class="font-medium text-gray-700">
+                                Joshua & Dima <span class="font-bold text-gray-900">5 - 2</span> Patrick & Jack
+                            </span>
+                            <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">Match 1</span>
+                        </div>
+                    `;
+                }
+
+            } else if (matchType === 'jd-jp-overall') {
+                // Aggregate Series View
+                if (leagueTitle) leagueTitle.innerText = "IGG Series Overall";
+                if (metaDate) metaDate.innerText = "Sunday 7 June";
+                if (metaLocation) metaLocation.innerText = "DCU Soccer Centre";
+                if (matchStatusLabel) matchStatusLabel.innerText = "Series Complete";
+                if (matchScoreDisplay) matchScoreDisplay.innerText = "10 - 5";
+
+                // Left Arrow visible
+                if (navLeftArrowBtn) navLeftArrowBtn.classList.remove('hidden');
+
+                // Header custom name updates
+                if (homeTeamName) homeTeamName.innerText = "Joshua & Dima";
+                if (awayTeamName) awayTeamName.innerText = "Patrick & Jack";
+                if (homeBadgeContainer) homeBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-yellow-400 border border-yellow-500";
+                if (awayBadgeContainer) awayBadgeContainer.className = "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden bg-blue-100 border border-blue-250";
+                if (homeBadgeImg) homeBadgeImg.style.display = 'none';
+                if (awayBadgeImg) awayBadgeImg.style.display = 'none';
+                if (homeBadgeFallback) {
+                    homeBadgeFallback.className = "text-yellow-950 font-black text-xs sm:text-sm md:text-base";
+                    homeBadgeFallback.innerText = "JD";
+                    homeBadgeFallback.classList.remove('hidden');
+                }
+                if (awayBadgeFallback) {
+                    awayBadgeFallback.className = "text-blue-900 font-black text-xs sm:text-sm md:text-base";
+                    awayBadgeFallback.innerText = "JP";
+                    awayBadgeFallback.classList.remove('hidden');
+                }
+
+                // Hide typical sub scorers area & Tab interface to present the full aggregated match flow
+                if (scorersGrid) scorersGrid.classList.add('hidden');
+                if (detailsTabsBar) detailsTabsBar.classList.add('hidden');
+                if (detailsContentArea) detailsContentArea.classList.add('hidden');
+                if (overallMatchSummary) overallMatchSummary.classList.remove('hidden');
+
+            } 
+            // ----------------------------------------------------
+            // 5) Default completed Friendly Match (2 - 3) Routing
+            // ----------------------------------------------------
+            else {
                 if (leagueTitle) leagueTitle.innerText = "IGG Friendlies";
                 if (metaDate) metaDate.innerText = "Thur 4 June, 14:30";
                 if (metaLocation) metaLocation.innerText = "DCU Soccer Centre";
@@ -1809,16 +1931,14 @@
                     mountTempleOnTargetBar.style.width = '72%';
                 }
 
-                // Summary configuration (Match 2-3 Friendly)
                 if (summaryTitle) summaryTitle.innerText = "2 - 3 Victory to Joshua!";
                 if (summaryText) summaryText.innerText = "This match was definitely something that no one would expect. Joshua was playing as a one man against Liam and Dima and he still managed to get the victory with only 7 minutes after Liam was tired out.";
 
                 if (lineupImage) lineupImage.setAttribute("src", "Lineup32.png");
                 if (lineupsText) lineupsText.innerText = "Lineups will be posted soon.";
 
-                // Head to Head standard
                 if (h2hHomeWins) h2hHomeWins.innerText = "0";
-                if (h2hAwayWins) h2hAwayWins.innerText = "2";
+                if (h2hAwayWins) h2hAwayWins.innerText = "3";
                 if (h2hHomeBadgeImg) {
                     h2hHomeBadgeImg.setAttribute('src', 'Clonturk.png');
                     h2hHomeBadgeImg.style.display = 'block';
@@ -1839,23 +1959,6 @@
                             <span class="text-[#001C48] bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">
                                 Friendly Match
                             </span>
-                        </div>
-                        <div onclick="showMatch('preseason')" class="group relative flex justify-between items-center py-2.5 border-b border-gray-50 overflow-hidden cursor-pointer h-12 transition-all duration-300">
-                            <div class="w-full flex flex-col sm:flex-row sm:items-center justify-between text-xs md:text-sm gap-2 transition-all duration-300 transform group-hover:-translate-y-8 group-hover:opacity-0">
-                                <span class="text-gray-400 font-medium">26 Apr 2026</span>
-                                <span class="font-medium text-gray-700">
-                                    Clonturk FC II <span class="font-bold text-gray-900">6 - 6</span> Mount Temple FC II 
-                                    <span class="text-xs text-blue-900 font-semibold block sm:inline sm:ml-1">(0 - 2 on penalties)</span>
-                                </span>
-                                <span class="text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">
-                                    Pre-Seasonal Match
-                                </span>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center transition-all duration-300 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bg-blue-50/80 rounded-xl">
-                                <span class="text-blue-700 font-extrabold text-xs tracking-wider uppercase flex items-center gap-1.5 font-bold">
-                                    View Match
-                                </span>
-                            </div>
                         </div>
                     `;
                 }
